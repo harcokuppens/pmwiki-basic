@@ -222,7 +222,7 @@ Then open in browser:
               or
      https://localhost:8443
 
-## How to debug in vscod
+## How to debug in vscode
 
 Within vscode you can then easily edit and debug php code. The `Dockerfile` for the
 container has already buildin a `launch.json` for debugging with xdebug within
@@ -233,11 +233,12 @@ To start debugging:
 1. **In vscode launch the "Listen for Xdebug" debug launch configuration.**
 
    This will start the debugger in vscode which launches for you the xdebug server on
-   TCP port 9003 in vscode to which a webbrowser client can connect to.
+   TCP port 9003 in vscode to which a webserver can connect to to start a debugging
+   session.
 
-2. **In a browser open an URL to your php webapplication.** If you have a breakpoint set
-   in your code, then vscode will be opened at that breakpoint. The debug session is
-   automatically started.
+2. **In a browser open an URL to your php webapplication.** If you have a breakpoint
+   set in your code, then vscode will be opened at that breakpoint. The debug session
+   is automatically started.
 
    The php/xdebug server is configured such that on a http request the xdebugging
    session will automatically be setup. This means that on a http request the
