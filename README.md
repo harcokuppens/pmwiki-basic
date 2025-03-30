@@ -39,7 +39,8 @@ cookbook in action using docker compose. The `pmwiki-basic` repository can be
 transformed into a cookbook repository by using a `setup` script. This `setup` script
 creates a README, new devcontainer config files, and pmwiki pages specific for a
 cookbook repository. The `setup` script makes it easy to create a new a cookbook
-repository, which you can push to another remote repository by changing its remote url with
+repository, which you can push to another remote repository by changing its remote
+url with
 
      git remote set-url origin NEW_REPO_URL
 
@@ -158,15 +159,15 @@ specific cookbook. Next to that the `pub/` directory also containers files insta
 by pmwiki which you do not want to mess with.
 
 Normally for a devcontainer the repository as a whole is bind mounted into the
-container. However because for developing PmWiki we have as workspace folder 
-the /var/www/html/pmwiki folder where the docker image already setups a pmwiki
-installation, and we only bind mount our custom wiki
-pages/uploads/config/cookbook and public data into it. However to be able 
-to commit to git from within the container we need also the whole repository
-mounted in the container. Therefore the whole git repository folder is also bind
-mounted but then in the subdirectory:
+container. However because for developing PmWiki we have as workspace folder the
+/var/www/html/pmwiki folder where the docker image already setups a pmwiki
+installation, and we only bind mount our custom wiki pages/uploads/config/cookbook
+and public data into it. However to be able to commit to git from within the
+container we need also the whole repository mounted in the container. Therefore the
+whole git repository folder is also bind mounted but then in the subdirectory:
 
-- `_GIT_REPO_COOKBOOK/`: for binding the whole git repository folder to enable git commits from within the container
+- `_GIT_REPO_COOKBOOK/`: for binding the whole git repository folder to enable git
+  commits from within the container
 
 ## Open bash shell in container
 
@@ -221,9 +222,28 @@ Then open in browser:
               or
      https://localhost:8443
 
+## How to debug in vscod
+
 Within vscode you can then easily edit and debug php code. The `Dockerfile` for the
 container has already buildin a `launch.json` for debugging with xdebug within
 vscode. So everything is already setup to directly debug php code.
+
+To start debugging:
+
+1. **In vscode launch the "Listen for Xdebug" debug launch configuration.**
+
+   This will start the debugger in vscode which launches for you the xdebug server on
+   TCP port 9003 in vscode to which a webbrowser client can connect to.
+
+2. **In a browser open an URL to your php webapplication.** If you have a breakpoint set
+   in your code, then vscode will be opened at that breakpoint. The debug session is
+   automatically started.
+
+   The php/xdebug server is configured such that on a http request the xdebugging
+   session will automatically be setup. This means that on a http request the
+   webserver will connect its buildin xdebug server to the xdebug client server in
+   vscode, after which a debugging session is started which works further over the
+   DBGP protocol.
 
 ## Helper scripts
 
@@ -241,7 +261,7 @@ to the container for direct usage within the container.
 - `pmwiki_mirror_remote_site` `USER@REMOTEHOST:REMOTEPMWIKIDIR`
 
   Mirror a remote site without overwriting the new cookbook we are locally
-  developing. **Run this script from a shell in your container.**  This can be useful
+  developing. **Run this script from a shell in your container.** This can be useful
   to test a new cookbook within an existing wiki site. Advised is to run this script
   in a terminal within vscode, because
   [vscode automatically forwards your local SSH agent if one is running](https://code.visualstudio.com/remote/advancedcontainers/sharing-git-credentials).
@@ -323,7 +343,7 @@ The following config files are used for the devcontainer
   - `wiki.d` for wiki pages
   - `uploads`: for attachments/pictures in pages
   - `local`: for the `local.php` configuration file
-  - `_GIT_REPO_COOKBOOK`: for binding the whole git repository folder 
+  - `_GIT_REPO_COOKBOOK`: for binding the whole git repository folder
 
   When you run the `setup` script to setup the project specificly for a cookbook
   script, then the modified `.devcontainer/docker-compose.yml` also bind mounts the
