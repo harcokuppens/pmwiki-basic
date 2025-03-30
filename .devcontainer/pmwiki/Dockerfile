@@ -298,47 +298,47 @@ RUN pecl install xdebug-3.1.6 && docker-php-ext-enable xdebug
 
 
 COPY <<'EOF' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini 
-# IMPORTANT : after changing an option 
-#    first check for errors in terminal with command :                  php -v 
-#    then reload the config in the apache server with the command:     /etc/init.d/apache2 reload    
+; IMPORTANT : after changing an option 
+;    first check for errors in terminal with command :                  php -v 
+;    then reload the config in the apache server with the command:     /etc/init.d/apache2 reload    
 
 
-# overrule settings in php.ini 
-#display_errors = On   # default value
-# instead of blank screen on error, it now outputs error info in browser window
+; overrule settings in php.ini 
+;display_errors = On   # default value
+; instead of blank screen on error, it now outputs error info in browser window
 
-# enable xdebug extension in apache webserver
+; enable xdebug extension in apache webserver
 zend_extension=xdebug
 
-# configure new xdebug 3.1.6 -- which is latest xdebug version still supporting php 7.4; newer versions require at least php 8.0
+; configure new xdebug 3.1.6 -- which is latest xdebug version still supporting php 7.4; newer versions require at least php 8.0
 xdebug.mode = debug
 xdebug.start_with_request = yes
-#xdebug.client_host = localhost
-# note: localhost  is already default value
-#xdebug.client_port = 9003
-# note: 9003 is already default value
+;xdebug.client_host = localhost
+; note: localhost  is already default value
+;xdebug.client_port = 9003
+; note: 9003 is already default value
 
-# print extra output when error occurs:   same config params used for old as new xdebug
+; print extra output when error occurs:   same config params used for old as new xdebug
 xdebug.show_local_vars=1
 xdebug.dump_undefined=1
 
-# with dump_globals option you can complete disable printing of all globals, but if enabled you still need to specify which globals to print:
+; with dump_globals option you can complete disable printing of all globals, but if enabled you still need to specify which globals to print:
 xdebug.dump_globals=1  
 xdebug.dump.POST=*
 xdebug.dump.GET=*
-# xdebug.dump.SERVER=HTTP_HOST, SERVER_NAME
-# xdebug.dump.SERVER=*
+; xdebug.dump.SERVER=HTTP_HOST, SERVER_NAME
+; xdebug.dump.SERVER=*
 
-# overrule settings in php.ini ; by default we use production
+; overrule settings in php.ini ; by default we use production
 xdebug.force_display_errors = 0
-# instead of blank screen on error, it now outputs error info in browser window
+; instead of blank screen on error, it now outputs error info in browser window
 
-# finetune what errors/warnings/notices to show -> seems still problemetic to get it right
-#xdebug.force_error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE & ~E_WARNING
-#xdebug.force_error_reporting = E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_WARNING
-#xdebug.force_error_reporting = E_ERROR | E_WARNING | E_PARSE
-#xdebug.force_error_reporting = E_ERROR | E_PARSE
-#xdebug.force_error_reporting = E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_WARNING & ~E_USER_DEPRECATED
+; finetune what errors/warnings/notices to show -> seems still problemetic to get it right
+;xdebug.force_error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE & ~E_WARNING
+;xdebug.force_error_reporting = E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_WARNING
+;xdebug.force_error_reporting = E_ERROR | E_WARNING | E_PARSE
+;xdebug.force_error_reporting = E_ERROR | E_PARSE
+;xdebug.force_error_reporting = E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_WARNING & ~E_USER_DEPRECATED
 xdebug.force_error_reporting = 1
 EOF
 
